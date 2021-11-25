@@ -1,0 +1,40 @@
+apiVersion: skaffold/v2beta26
+kind: Config
+metadata:
+  name: blog
+build:
+  artifacts:
+  - image: client
+    context: client
+    docker:
+      dockerfile: Dockerfile
+  - image: comments
+    context: comments
+    docker:
+      dockerfile: Dockerfile
+  - image: event-bus
+    context: event-bus
+    docker:
+      dockerfile: Dockerfile
+  - image: moderation
+    context: moderation
+    docker:
+      dockerfile: Dockerfile
+  - image: posts
+    context: posts
+    docker:
+      dockerfile: Dockerfile
+  - image: query
+    context: query
+    docker:
+      dockerfile: Dockerfile
+deploy:
+  kubectl:
+    manifests:
+    - infra/k8s/client.yaml
+    - infra/k8s/comments.yaml
+    - infra/k8s/event-bus.yaml
+    - infra/k8s/ingress.yaml
+    - infra/k8s/moderation.yaml
+    - infra/k8s/posts.yaml
+    - infra/k8s/query.yaml
